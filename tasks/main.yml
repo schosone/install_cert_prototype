@@ -1,0 +1,35 @@
+- name: sets fact from var
+  block:
+    - name: Set fact from CLI var
+      set_fact:
+        tower_project_admin: "{{ cli_project_create_admin }}"
+  rescue:
+    - debug:
+        msg: 'This is not set, must be using a tower vairable.'
+  ignore_errors: yes
+
+- name: set fact from tower fact
+  block:
+    - name: Set fact from Tower var
+      set_fact:
+        tower_project_admin: "{{ tower_user_name }}"
+  rescue:
+    - debug:
+        msg: 'This is not set, must be using a CLI variable.'
+  ignore_errors: yes
+
+- name: Create new tower project
+  tower_project:
+    name: "{{ name_of_created_project }}"
+    description: "{{ description_of_created_project }}"
+    organization: "{{ organization_of_created_project }}"
+    scm_url: "{{ code_to_run }}"
+    state: present
+    tower_config_file: "{{ ansible_tower_config }}"
+
+- name: Add job runner as project admin
+  tower_role:
+    user: "{{ tower_project_admin }}"
+    project: "{{ name_of_created_project }}"
+    role: admin
+    state: present

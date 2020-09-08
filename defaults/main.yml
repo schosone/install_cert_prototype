@@ -1,0 +1,24 @@
+---
+#Defaults for create_project roles
+
+#deliberately hashed out to ensure undefined unless required.
+
+#cli_project_create_admin: undefined
+
+#The name of the user to create as a Project admin. Default makes the admin user the default project admin.
+tower_project_admin: admin
+
+#ensure you change this as required or add to vars or inventory file.
+name_of_created_project: sample
+
+#A description to describe the project.
+description_of_created_project: "Default project description."
+
+#Organization must exist when naming an org for the project.
+organization_of_created_project: "Default_Org"
+
+#Ansible Tower Config File
+ansible_tower_config: "~/tower_cli.cfg"
+
+#Use this tod efine what ansible you are running with this project.
+code_to_run: "undefined"
