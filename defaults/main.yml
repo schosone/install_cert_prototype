@@ -5,5 +5,5 @@
 
 #cli_project_create_admin: undefined
 
-#The name of the user to create as a Project admin. Default makes the admin user the default project admin.
+#The hostname to use for the host you're adding.
 tower_inventory_host: undefined
