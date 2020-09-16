@@ -1,6 +1,6 @@
 - name: Add tower host
   tower_host:
-    name: {{ tower_inventory_host }}
+    name: "{{ tower_inventory_host }}"
     description: "Adding a test user to the inventory."
     inventory: "Test Inventory"
     state: present
