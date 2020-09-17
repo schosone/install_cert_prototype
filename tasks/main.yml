@@ -1,20 +1,20 @@
 - name: Read hostnames to add from somewhere
-    uri: 
-      url: https://gist.githubusercontent.com/nstrug/130cbe8c3d9079d4c61a4071215afdbe/raw/45fe23d1759047ea6a7b5b40297e09df99f4c494/my_hosts.txt
-      return_content: yes
-    register: host_list
+  uri: 
+    url: https://gist.githubusercontent.com/nstrug/130cbe8c3d9079d4c61a4071215afdbe/raw/45fe23d1759047ea6a7b5b40297e09df99f4c494/my_hosts.txt
+    return_content: yes
+  register: host_list
 
-  - name: print the results
+- name: print the results
     debug:
       msg: "{{ host_list.content.split() }}"
 
-  - name: Insert hosts into inventory
-    tower_host:
-      inventory: test_inventory
-      name: "{{ item }}"
-      state: present
-      tower_host: ansible.libvirt.oldstables
-      tower_password: r3dhat00
-      tower_username: admin
-      validate_certs: no
-    loop: "{{ host_list.content.split() }}"
+- name: Insert hosts into inventory
+  tower_host:
+    inventory: test_inventory
+    name: "{{ item }}"
+    state: present
+    tower_host: ansible.libvirt.oldstables
+    tower_password: r3dhat00
+    tower_username: admin
+    validate_certs: no
+  loop: "{{ host_list.content.split() }}"
