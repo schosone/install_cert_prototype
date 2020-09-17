@@ -5,8 +5,8 @@
   register: host_list
 
 - name: print the results
-    debug:
-      msg: "{{ host_list.content.split() }}"
+  debug:
+    msg: "{{ host_list.content.split() }}"
 
 - name: Insert hosts into inventory
   tower_host:
