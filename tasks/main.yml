@@ -10,7 +10,7 @@
 
 - name: Insert hosts into inventory
   tower_host:
-    inventory: test_inventory
+    inventory: "Test Inventory"
     name: "{{ item }}"
     state: present
     tower_config_file: "~/tower_cli.cfg"
