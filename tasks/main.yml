@@ -1,9 +1,4 @@
-- name: Update Inventory
-  hosts: localhost
-  gather_facts: false
-  tasks:
-
-  - name: Read hostnames to add from somewhere
+- name: Read hostnames to add from somewhere
     uri: 
       url: https://gist.githubusercontent.com/nstrug/130cbe8c3d9079d4c61a4071215afdbe/raw/45fe23d1759047ea6a7b5b40297e09df99f4c494/my_hosts.txt
       return_content: yes
