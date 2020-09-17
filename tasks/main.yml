@@ -13,8 +13,4 @@
     inventory: test_inventory
     name: "{{ item }}"
     state: present
-    tower_host: ansible.libvirt.oldstables
-    tower_password: r3dhat00
-    tower_username: admin
-    validate_certs: no
   loop: "{{ host_list.content.split() }}"
