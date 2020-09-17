@@ -13,4 +13,5 @@
     inventory: test_inventory
     name: "{{ item }}"
     state: present
+    tower_config_file: "~/tower_cli.cfg"
   loop: "{{ host_list.content.split() }}"
