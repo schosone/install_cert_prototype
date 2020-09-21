@@ -14,11 +14,17 @@
     privatekey_path: /etc/ssl/ansible/tower.oldstable.me.uk.key
     common_name: oldstable.me.uk
   delegate_to: smallstep.oldstable.me.uk
+ 
+- meta: clear_facts
 
 - name: Sign Certificate Request
   command: step certificate sign tower.oldstable.me.uk.csr /root/.step/certs/root_ca.crt /root/.step/secrets/root_ca_key
   delegate_to: smallstep.oldstable.me.uk
 
+- meta: clear_facts
+
 - name: Move Cert to desired host.
   command: rsync -avzhe ssh tower.oldstable.me.uk.crt ec2-user@tower.oldstable.me.uk:/home/ec2-user/
-  delegate_to: tower.oldstable.me.uk
+  delegate_to: smallstep.oldstable.me.uk
+
+- meta: clear_facts
