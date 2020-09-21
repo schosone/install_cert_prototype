@@ -17,7 +17,7 @@
   delegate_to: smallstep.oldstable.me.uk
 
 - name: Sign Certificate Request
-  command: step certificate sign tower.oldstable.me.uk.csr 
+  command: step certificate sign tower.oldstable.me.uk.csr /root/.step/certs/root_ca.crt /root/.step/secrets/root_ca_key
   delegate_to: smallstep.oldstable.me.uk
 
 - name: Move Cert to desired host.
