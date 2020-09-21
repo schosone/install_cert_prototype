@@ -1,6 +1,6 @@
 - name: Create directory for SSL
   file:
-    path: '/etc/ssl/ansible'
+    path: /etc/ssl/ansible
     state: directory
     mode: '0755'
 
