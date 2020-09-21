@@ -1,20 +1,20 @@
 - name: Create directory for SSL
   file:
-    path: /etc/ssl/ansible
+    path: "/etc/ssl/ansible"
     state: directory
     mode: 0755
 
 - name: Generate private key (4096, RSA)
   openssl_privatekey:
-    path: /etc/ssl/ansible/tower.oldstable.me.uk.key    
+    path: "/etc/ssl/ansible/tower.oldstable.me.uk.key"
 
 - name: Create SSL CSR Request
   openssl_csr:
-    path: /etc/ssl/ansible/tower.oldstable.me.uk.csr
-    privatekey_path: /etc/ssl/ansible/tower.oldstable.me.uk.key
-    common_name: oldstable.me.uk
-    country_name: GB
-  delegate_to: smallstep.oldstable.me.uk
+    path: "/etc/ssl/ansible/tower.oldstable.me.uk.csr"
+    privatekey_path: "/etc/ssl/ansible/tower.oldstable.me.uk.key"
+    common_name: "oldstable.me.uk"
+    country_name: "GB"
+  delegate_to: "smallstep.oldstable.me.uk"
 
 - name: Sign Certificate Request
   command: step certificate sign tower.oldstable.me.uk.csr 
