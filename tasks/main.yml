@@ -1,17 +1,25 @@
-- name: Read hostnames to add from somewhere
-  uri: 
-    url: https://gist.githubusercontent.com/nstrug/130cbe8c3d9079d4c61a4071215afdbe/raw/45fe23d1759047ea6a7b5b40297e09df99f4c494/my_hosts.txt
-    return_content: yes
-  register: host_list
+- name: Create directory for SSL
+  file:
+    path: /etc/ssl/ansible
+    state: directory
+    mode: 0755
 
-- name: print the results
-  debug:
-    msg: "{{ host_list.content.split() }}"
+- name: Generate private key (4096, RSA)
+  openssl_privatekey:
+    path: /etc/ssl/ansible/tower.oldstable.me.uk.key    
 
-- name: Insert hosts into inventory
-  tower_host:
-    inventory: "Test Inventory"
-    name: "{{ item }}"
-    state: present
-    tower_config_file: "~/tower_cli.cfg"
-  loop: "{{ host_list.content.split() }}"
+- name: Create SSL CSR Request
+  openssl_csr:
+    path: /etc/ssl/ansible/tower.oldstable.me.uk.csr
+    privatekey_path: /etc/ssl/ansible/tower.oldstable.me.uk.key
+    common_name: oldstable.me.uk
+    country_name: GB
+  delegate_to: smallstep.oldstable.me.uk
+
+- name: Sign Certificate Request
+  command: step certificate sign tower.oldstable.me.uk.csr 
+  delegate_to: smallstep.oldstable.me.uk
+
+- name: Move Cert to desired host.
+  command: rsync -avzhe ssh tower.oldstable.me.uk.crt ec2-user@tower.oldstable.me.uk:/home/ec2-user/
+  delegate_to: tower.oldstable.me.uk
