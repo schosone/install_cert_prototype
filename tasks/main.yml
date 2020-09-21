@@ -13,7 +13,6 @@
     path: /etc/ssl/ansible/tower.oldstable.me.uk.csr
     privatekey_path: /etc/ssl/ansible/tower.oldstable.me.uk.key
     common_name: oldstable.me.uk
-    country_name: "GB"
   delegate_to: smallstep.oldstable.me.uk
 
 - name: Sign Certificate Request
