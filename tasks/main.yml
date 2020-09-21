@@ -14,7 +14,8 @@
     privatekey_path: /etc/ssl/ansible/tower.oldstable.me.uk.key
     common_name: oldstable.me.uk
   delegate_to: smallstep.oldstable.me.uk
- 
+  become: yes
+
 - meta: clear_facts
 
 - name: Sign Certificate Request
