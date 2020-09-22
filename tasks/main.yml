@@ -17,9 +17,17 @@
 #  become: yes
 
 - name: Sign Certificate Request
-  command: step ca certificate tower.oldstable.me.uk /home/ec2-user/tower.crt /home/ec2-user/tower.key
+  expect:
+    command: step ca certificate tower.oldstable.me.uk /home/ec2-user/tower.crt /home/ec2-user/tower.key
+    responses:
+      (?i)password: "password"
   delegate_to: smallstep.oldstable.me.uk
   become: yes
+  
+    expect:
+    command: passwd username
+    responses:
+      (?i)password: "MySekretPa$$word"
 
 #- name: Sign Certificate Request
 #  command: step certificate sign /etc/ssl/ansible/tower.oldstable.me.uk.csr /root/.step/certs/root_ca.crt /root/.step/secrets/root_ca_key
