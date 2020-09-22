@@ -22,7 +22,7 @@
   expect:
     command: step ca certificate tower.oldstable.me.uk /home/ec2-user/tower.crt /home/ec2-user/tower.key
     responses:
-      (?i)password: "password"
+      Please enter the password to decrypt the provisioner key: "password"
   delegate_to: smallstep.oldstable.me.uk
   become: yes
 
