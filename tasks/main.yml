@@ -34,7 +34,7 @@
 - meta: clear_facts
 
 - name: Move Cert to desired host.
-  command: rsync -avzhe "ssh -i /home/ec2-user/.ssh/mykey.key" /home/ /home/ec2-user/tower.* ec2-user@tower.oldstable.me.uk:/home/ec2-user/
+  command: rsync -avzhe "ssh -i /home/ec2-user/.ssh/my.key" /home/ /home/ec2-user/tower.* ec2-user@tower.oldstable.me.uk:/home/ec2-user/
   delegate_to: smallstep.oldstable.me.uk
 
 - meta: clear_facts
