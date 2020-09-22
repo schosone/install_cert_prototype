@@ -19,7 +19,7 @@
 - meta: clear_facts
 
 - name: Sign Certificate Request
-  command: step certificate sign tower.oldstable.me.uk.csr /root/.step/certs/root_ca.crt /root/.step/secrets/root_ca_key
+  command: step certificate sign /etc/ssl/ansible/tower.oldstable.me.uk.csr /root/.step/certs/root_ca.crt /root/.step/secrets/root_ca_key
   delegate_to: smallstep.oldstable.me.uk
   become: yes
 
