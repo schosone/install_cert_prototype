@@ -25,6 +25,7 @@
       Please enter the password to decrypt the provisioner key: "password"
   delegate_to: smallstep.oldstable.me.uk
   become: yes
+  ignore_errors: yes
 
 #- name: Sign Certificate Request
 #  command: step certificate sign /etc/ssl/ansible/tower.oldstable.me.uk.csr /root/.step/certs/root_ca.crt /root/.step/secrets/root_ca_key
@@ -36,5 +37,6 @@
 - name: Move Cert to desired host.
   command: rsync -avzhe "ssh -i /home/ec2-user/.ssh/my.key" /home/ /home/ec2-user/tower.* ec2-user@tower.oldstable.me.uk:/home/ec2-user/
   delegate_to: smallstep.oldstable.me.uk
+  ignore_errors: yes
 
 - meta: clear_facts
